@@ -2,11 +2,14 @@ package com.projetoescolar.model.entities;
 
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Address {
     private String zipCode;
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

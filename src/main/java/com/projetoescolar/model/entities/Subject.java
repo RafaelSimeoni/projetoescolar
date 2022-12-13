@@ -2,12 +2,15 @@ package com.projetoescolar.model.entities;
 
 import com.projetoescolar.model.enums.DayOfTheWeekEnum;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +20,7 @@ public class Subject {
     @ManyToOne
     @JoinColumn(name= "teacher_id", referencedColumnName = "id")
     private Teacher teacher;
+    @ManyToMany(mappedBy = "subjectList")
     private List<Student> studentList;
     private String startTime;
     private String endTime;
