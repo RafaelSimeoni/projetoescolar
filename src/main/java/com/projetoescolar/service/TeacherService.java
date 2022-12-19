@@ -36,4 +36,18 @@ public class TeacherService {
         Teacher teacher = teacherRepository.save(mapper.map(teacherForm, Teacher.class));
         return mapper.map(teacher, TeacherDTO.class);
     }
+
+    public TeacherDTO update(Long id, TeacherForm teacherForm) {
+        getById(id);
+        Teacher teacher = mapper.map(teacherForm, Teacher.class);
+        teacher.setId(id);
+        teacherRepository.save(teacher);
+        return mapper.map(teacher, TeacherDTO.class);
+    }
+
+    public String delete(Long id) {
+        getById(id);
+        teacherRepository.deleteById(id);
+        return "Professor excluído com sucesso!";
+    }
 }

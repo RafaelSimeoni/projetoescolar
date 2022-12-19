@@ -33,4 +33,14 @@ public class TeacherController {
         return ResponseEntity.ok().body(teacherService.save(teacherForm));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<TeacherDTO> update(@PathVariable Long id, @RequestBody @Valid TeacherForm teacherForm) {
+        return ResponseEntity.ok().body(teacherService.update(id, teacherForm));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        return ResponseEntity.ok().body(teacherService.delete(id));
+    }
+
 }
