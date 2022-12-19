@@ -1,17 +1,23 @@
 package com.projetoescolar.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
+
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToMany
+
+    @OneToMany(cascade= CascadeType.ALL)
     @JoinColumn(name= "teacher_id", referencedColumnName = "id")
     private List<Subject> subjectList;
 }

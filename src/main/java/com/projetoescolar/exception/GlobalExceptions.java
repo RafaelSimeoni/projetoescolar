@@ -13,10 +13,9 @@ import java.time.LocalDateTime;
 public class GlobalExceptions {
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<StandardError> entityNotFoundHandler(EntityNotFoundException e, HttpServletRequest request){
+        System.err.println("GLOBAL EXCEPTION");
         StandardError se = new StandardError(LocalDateTime.now(), 404, "Not Found", e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(se);
     }
-
-
 
 }

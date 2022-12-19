@@ -18,6 +18,7 @@ public class Student {
     private Long id;
     private String registration;
     private Double average;
+
     @OneToOne(cascade= CascadeType.ALL)
     @JoinColumn(name= "address_id", referencedColumnName = "id")
     private Address address;
@@ -27,8 +28,4 @@ public class Student {
     @ManyToMany
     @JoinTable(name="tb_student_subject", joinColumns = @JoinColumn(name="student_id"), inverseJoinColumns = @JoinColumn(name="subject_id"))
     private List<Subject> subjectList = new ArrayList<>();
-
-    
-
-
 }
