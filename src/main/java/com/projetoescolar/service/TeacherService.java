@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,9 +26,14 @@ public class TeacherService {
         return mapper.map(teacherOptional.get(), TeacherDTO.class);
     }
 
+    public List<TeacherDTO> listAll() {
+        List<Teacher> teacherList = teacherRepository.findAll();
+        if(teacherList.isEmpty()) throw new EntityNotFoundException("Não há professores cadastrados no sistema");
+        return teacherList.stream().map(teacher -> mapper.map(teacher, TeacherDTO.class)).toList();
+    }
+
     public TeacherDTO save(TeacherForm teacherForm) {
         Teacher teacher = teacherRepository.save(mapper.map(teacherForm, Teacher.class));
         return mapper.map(teacher, TeacherDTO.class);
     }
-
 }
