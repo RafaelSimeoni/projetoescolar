@@ -3,6 +3,7 @@ package com.projetoescolar.service;
 import com.projetoescolar.exception.EntityNotFoundException;
 import com.projetoescolar.model.dtos.TeacherDTO;
 import com.projetoescolar.model.entities.Teacher;
+import com.projetoescolar.model.forms.TeacherForm;
 import com.projetoescolar.repository.TeacherRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,4 +24,10 @@ public class TeacherService {
         if(teacherOptional.isEmpty()) throw new EntityNotFoundException("Professor não encontrado");
         return mapper.map(teacherOptional.get(), TeacherDTO.class);
     }
+
+    public TeacherDTO save(TeacherForm teacherForm) {
+        Teacher teacher = teacherRepository.save(mapper.map(teacherForm, Teacher.class));
+        return mapper.map(teacher, TeacherDTO.class);
+    }
+
 }
